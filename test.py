@@ -12,7 +12,19 @@ import json
 import os
 from datetime import datetime
 from dataclasses import dataclass, field, asdict
-from bot import NNBt  # Thay bằng class bot của bạn
+from bot2 import NNBt  # Thay bằng class bot của bạn
+
+"""
+"levels": [
+    {"label": "Cực yếu",    "skill": 0},   → ~800 Elo
+    {"label": "Rất yếu",    "skill": 1},   → ~900 Elo
+    {"label": "Yếu",        "skill": 3},   → ~1050 Elo
+    {"label": "Trung bình", "skill": 5},   → ~1200 Elo
+    {"label": "Khá",        "skill": 8},   → ~1400 Elo
+    {"label": "Mạnh",       "elo": 1500},  → 1500 Elo thật
+    {"label": "Rất mạnh",   "elo": 1800},  → 1800 Elo thật
+]
+"""
 
 
 # ──────────────────────────────────────────────
@@ -21,7 +33,7 @@ from bot import NNBt  # Thay bằng class bot của bạn
 CONFIG = {
     "stockfish_path": "stockfish/stockfish-windows-x86-64-avx2.exe",
     "model_path": "chess_model.pth",
-    "bot_depth": 3,               # Độ sâu minimax của bot
+    "bot_depth": 4,               # Độ sâu minimax của bot
     "matches_per_level": 10,      # Số ván mỗi cấp độ (nên chẵn để xen kẽ màu)
     "sf_move_time": 0.05,         # Thời gian Stockfish suy nghĩ (giây)
     "sf_move_depth": 1,           # Depth Stockfish (dùng kết hợp với time)
