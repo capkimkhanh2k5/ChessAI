@@ -144,6 +144,41 @@ export default function App() {
                         </div>
                     </div>
 
+                    {/* Move history */}
+                    <div className="sidebar-section">
+                        <div className="sidebar-section-title">📝 Lịch Sử Nước Đi</div>
+                        <div className="move-history">
+                            {moveHistory.length === 0 ? (
+                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#888' }}>
+                                    Chưa có nước đi nào...
+                                </div>
+                            ) : (
+                                <div className="move-history-inner">
+                                    {moveHistory.map( ( m, i ) => (
+                                        <span
+                                            key={i}
+                                            className={`move-token ${ m.side === 'me' ? 'mine' : 'bot' }`}
+                                            title={m.side === 'me' ? 'Nước của bạn' : 'Nước của bot'}
+                                        >
+                                            {Math.floor( i / 2 ) + 1}{i % 2 === 0 ? '.' : '...'} {m.san}
+                                        </span>
+                                    ) )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {lastStats && (
+                        <div className="sidebar-section card-yellow">
+                            <div className="sidebar-section-title">🤖 Thống Kê Lần Cuối</div>
+                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: 6 }}>
+                                <div>Engine: <strong>{lastStats.engine?.toUpperCase()}</strong></div>
+                                <div>Nodes: <strong>{lastStats.nodes != null ? lastStats.nodes.toLocaleString() : '—'}</strong></div>
+                                <div>Thời gian: <strong>{formatMs( lastStats.elapsed_ms )}</strong></div>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Stats */}
                     <div className="sidebar-section">
                         <div className="sidebar-section-title">📊 Kết Quả</div>
@@ -168,40 +203,7 @@ export default function App() {
                     </div>
 
                     {/* Last move stats */}
-                    {lastStats && (
-                        <div className="sidebar-section card-yellow">
-                            <div className="sidebar-section-title">🤖 Thống Kê Lần Cuối</div>
-                            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                                <div>Engine: <strong>{lastStats.engine?.toUpperCase()}</strong></div>
-                                <div>Nodes: <strong>{lastStats.nodes != null ? lastStats.nodes.toLocaleString() : '—'}</strong></div>
-                                <div>Thời gian: <strong>{formatMs( lastStats.elapsed_ms )}</strong></div>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Move history */}
-                    <div className="sidebar-section">
-                        <div className="sidebar-section-title">📝 Lịch Sử Nước Đi</div>
-                        <div className="move-history">
-                            {moveHistory.length === 0 ? (
-                                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#888' }}>
-                                    Chưa có nước đi nào...
-                                </div>
-                            ) : (
-                                <div className="move-history-inner">
-                                    {moveHistory.map( ( m, i ) => (
-                                        <span
-                                            key={i}
-                                            className={`move-token ${ m.side === 'me' ? 'mine' : 'bot' }`}
-                                            title={m.side === 'me' ? 'Nước của bạn' : 'Nước của bot'}
-                                        >
-                                            {Math.floor( i / 2 ) + 1}{i % 2 === 0 ? '.' : '...'} {m.san}
-                                        </span>
-                                    ) )}
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                    
 
                 </aside>
 

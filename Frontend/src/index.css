@@ -513,6 +513,8 @@ h1, h2, h3 {
   font-weight: 700;
 }
 
+
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .main-layout {
