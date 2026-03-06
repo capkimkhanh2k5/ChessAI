@@ -482,7 +482,7 @@ export default function App() {
                 <span>Chess Bot — Powered by Python AI Engine</span>
                 <span>
                     API:{' '}
-                    <a href={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/docs`} target="_blank" rel="noreferrer">
+                    <a href={`${import.meta.env.VITE_API_URL || '/api'}/docs`} target="_blank" rel="noreferrer">
                         /docs
                     </a>
                 </span>

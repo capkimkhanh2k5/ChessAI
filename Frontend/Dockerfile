@@ -16,7 +16,9 @@ RUN npm ci --only=production=false
 COPY . .
 
 # Build argument for API URL
-ARG VITE_API_URL=http://localhost:8000
+# Default to /api for production (nginx proxy)
+# Use http://localhost:8000 for local dev
+ARG VITE_API_URL=/api
 ENV VITE_API_URL=$VITE_API_URL
 
 # Build application

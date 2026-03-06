@@ -39,15 +39,27 @@ cp .env.prod.example .env.prod
 # Docker Hub credentials
 DOCKERHUB_USERNAME=your_dockerhub_username
 
-# Frontend API URL (used during Docker build)
-VITE_API_URL=https://your-domain.com/api
+# Frontend API URL - IMPORTANT!
+# Use relative path /api for nginx reverse proxy setup
+VITE_API_URL=/api
+
+# Or use full URL if not using reverse proxy:
+# VITE_API_URL=https://your-domain.com/api
 ```
 
-3. **Build and deploy**:
+3. **Build images with production config**:
 ```bash
-# Build images with production config
+# Use the build script (recommended)
+./scripts/build-prod.sh
+
+# Or manually with docker-compose
 docker-compose -f docker-compose.prod.yml build
-# Or use the deployment script
+
+# Or build directly with docker
+docker build --build-arg VITE_API_URL=/api -t username/chess-bot-frontend:latest ./Frontend
+```
+
+4. **Deploy**:
 ./scripts/deploy.sh
 ```
 
