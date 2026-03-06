@@ -51,11 +51,14 @@ fi
 log_info "Using: $DOCKER_COMPOSE"
 
 # Load environment variables
-if [ -f .env ]; then
+if [ -f .env.prod ]; then
+    log_info "Loading environment variables from .env.prod"
+    export $(cat .env.prod | grep -v '^#' | xargs)
+elif [ -f .env ]; then
     log_info "Loading environment variables from .env"
     export $(cat .env | grep -v '^#' | xargs)
 else
-    log_warn "No .env file found, using default values"
+    log_warn "No .env.prod or .env file found, using default values"
 fi
 
 # Pull latest images from Docker Hub

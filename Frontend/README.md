@@ -2,6 +2,27 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+## Environment Setup
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Configure the API URL in `.env`:
+   ```
+   VITE_API_URL=http://localhost:8000
+   ```
+
+For production, set the appropriate API URL (e.g., `https://chess-ai.cloud.hnagnurtme.id.vn/api`).
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh

@@ -33,6 +33,10 @@ services:
     restart: always
     ports:
       - "5175:80"
+    build:
+      context: ./Frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL:-https://chess-ai.cloud.hnagnurtme.id.vn/api}
     depends_on:
       backend:
         condition: service_healthy

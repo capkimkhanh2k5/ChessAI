@@ -17,7 +17,7 @@ A chess engine application with three different bot difficulty levels and a Reac
 
 ## Quick Start with Docker
 
-### Run Everything
+### Local Development
 
 ```bash
 docker-compose up -d
@@ -26,6 +26,32 @@ docker-compose up -d
 Services will be available at:
 - Backend API: http://localhost:8000/docs
 - Frontend: http://localhost:5000
+
+### Production Deployment
+
+1. **Create production environment file**:
+```bash
+cp .env.prod.example .env.prod
+```
+
+2. **Configure environment variables** in `.env.prod`:
+```bash
+# Docker Hub credentials
+DOCKERHUB_USERNAME=your_dockerhub_username
+
+# Frontend API URL (used during Docker build)
+VITE_API_URL=https://your-domain.com/api
+```
+
+3. **Build and deploy**:
+```bash
+# Build images with production config
+docker-compose -f docker-compose.prod.yml build
+# Or use the deployment script
+./scripts/deploy.sh
+```
+
+> **Note**: `VITE_API_URL` is a build-time variable for Vite. If you change it, you must rebuild the frontend image.
 
 ### Stop Services
 
@@ -67,12 +93,22 @@ API documentation: http://localhost:8000/docs
 cd Frontend
 ```
 
-2. Install dependencies:
+2. **Setup environment variables**:
 ```bash
-npm install
+cp .env.example .env
 ```
 
-3. Run development server:
+Edit `.env` to configure API URL:
+```
+VITE_API_URL=http://localhost:8000
+```
+
+3. Install dependencies:
+```bash
+5pm install
+```
+
+4. Run development server:
 ```bash
 npm run dev
 ```
