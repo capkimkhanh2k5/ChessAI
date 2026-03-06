@@ -80,11 +80,18 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.GCP_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Create directories on GCP
+        run: |
+          ssh ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }} << 'ENDSSH'
+            mkdir -p ~/chess-bot/scripts
+            mkdir -p ~/chess-bot/nginx
+          ENDSSH
+
       - name: Copy deployment files to GCP
         run: |
-          scp -r docker-compose.prod.yml ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/
-          scp -r scripts/deploy.sh ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/
-          scp -r nginx/nginx.conf ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/nginx/
+          scp docker-compose.prod.yml ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/
+          scp scripts/deploy.sh ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/scripts/
+          scp nginx/nginx.conf ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/nginx/
 
       - name: Deploy on GCP via SSH
         run: |
