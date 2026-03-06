@@ -91,7 +91,7 @@ jobs:
         run: |
           scp docker-compose.prod.yml ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/
           scp scripts/deploy.sh ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/scripts/
-          scp nginx/nginx.conf ${{ env.GCP_USERNAME }}@${{ env.GCP_HOST }}:~/chess-bot/nginx/
+          # Note: Nginx config already managed by install.sh, no need to copy on every deploy
 
       - name: Deploy on GCP via SSH
         run: |
